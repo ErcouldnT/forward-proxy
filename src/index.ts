@@ -1,5 +1,7 @@
 import net from "net";
-export const server = net.createServer();
+import "dotenv/config";
+
+const server = net.createServer();
 
 server.on("connection", (clientToProxySocket) => {
   console.log("Client connected to proxy");
@@ -59,9 +61,9 @@ server.on("close", () => {
 server.listen(
   {
     host: "0.0.0.0",
-    port: 8080,
+    port: process.env.PORT || 8080,
   },
   () => {
-    console.log("Server listening on 0.0.0.0:8080");
+    console.log("Server listening on 0.0.0.0:" + process.env.PORT);
   },
 );
